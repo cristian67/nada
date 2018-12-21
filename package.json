@@ -4,8 +4,10 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node server.js",
-        "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+        "start": "node server.js --excec babel-node -e js",
+        "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+        "servidor": "nodemon server --excec babel-node -e js",
+        "cliente": "cd client && npm start"
 
     },
     "author": "Cristian",
