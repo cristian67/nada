@@ -4,11 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node server.js --excec babel-node -e js",
-        "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
-        "servidor": "nodemon server --excec babel-node -e js",
-        "cliente": "cd client && npm start"
-
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js",
+        "heroku-postbuild": "cd client && npm install && npm run build"
     },
     "author": "Cristian",
     "license": "ISC",
