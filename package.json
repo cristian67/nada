@@ -1,0 +1,29 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server.js",
+        "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+
+    },
+    "author": "Cristian",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^3.0.2",
+        "body-parse": "^0.1.0",
+        "cors": "^2.8.5",
+        "express": "^4.16.4",
+        "jsonwebtoken": "^8.4.0",
+        "mongoose": "^5.4.0",
+        "mongoose-unique-validator": "^2.0.2",
+        "moongoose": "0.0.5",
+        "underscore": "^1.9.1"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-0": "^6.24.1"
+    }
+}
