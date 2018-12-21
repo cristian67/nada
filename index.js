@@ -24,8 +24,8 @@ app.use(cors());
 // Config global de rutas
 app.use(require('./server/routes/index'));
 
-//Habilitar el carpeta public
-app.use(express.static(path.resolve(__dirname, '../public')));
+//conectar al cliente 
+app.use(express.static(path.join(__dirname, 'client/build')))
 
 // Conectar a BDD
 mongoose.connect(process.env.URLDB, (err, res) => {
@@ -99,6 +99,12 @@ app.get('/api/productoss', (req, res) => {
         productos
     })
 });
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
 
 // Levantar servicio
 app.listen(process.env.PORT, () => {
