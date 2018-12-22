@@ -3,7 +3,8 @@ const app = express();
 
 const Usuario = require('../models/usuario');
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('../../index').bcrypt
+
 const _ = require('underscore');
 
 let { verificaToken } = require('../../server/middleware/autenticacion');
