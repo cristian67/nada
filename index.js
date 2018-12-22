@@ -1,7 +1,32 @@
+require('./server/config/config');
+
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
+const mongoose = require('mongoose');
+
 
 const app = express();
+const bodyParser = require('body-parser');
+
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json());
+
+//Cors para ser consumido sin problemas :)
+app.use(cors());
+
+// Conectar a BDD
+mongoose.connect(process.env.URLDB, (err, res) => {
+    if (err) throw err;
+    console.log("Conectado a BDD")
+});
+
+// Config global de rutas
+app.use(require('./server/routes/index'));
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
