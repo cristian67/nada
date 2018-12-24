@@ -14,16 +14,13 @@ class WhenInView extends Component {
 
 
       onEnter({ currentPosition }){
-        console.log(currentPosition)
         if (currentPosition === Waypoint.inside){
-
             this.setState({
                 isInView: true
             });
         }
     }
         onLeave({ currentPosition }){
-        console.log(currentPosition)
         if (this.currentPosition === Waypoint.below){  
 
             this.setState({

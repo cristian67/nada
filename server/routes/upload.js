@@ -70,7 +70,7 @@ app.put('/upload/:tipo/:id', function(req, res) {
 
 
     //SUBIR ARCHIVO
-    archivo.mv(`upload/${tipo}/${nombreArchivo}`, (err) => {
+    archivo.mv(`client/public/upload/${tipo}/${nombreArchivo}`, (err) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -99,7 +99,7 @@ app.put('/upload/:tipo/:id', function(req, res) {
 ///BORRAR ARCHIVO///
 ///----------------///
 function borrarArchivo(nombreArchivo, tipo) {
-    let pathURL = path.resolve(__dirname, `../../upload/${tipo}/${nombreArchivo}`);
+    let pathURL = path.resolve(__dirname, `../../client/public/upload/${tipo}/${nombreArchivo}`);
     if (fs.existsSync(pathURL)) {
         fs.unlinkSync(pathURL);
     }

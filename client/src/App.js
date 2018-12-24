@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import {makeMainRoutes} from './components/routes';
-
-//llamar la funcion
-const routes = makeMainRoutes();
+import Router from './components/Router';
 
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
-         {routes}
-      </React.Fragment>
+      <Router />
     );
   }
 }

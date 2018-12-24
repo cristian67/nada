@@ -11,7 +11,7 @@ app.use('/api', require('./login'))
 
 /*subir archivos*/
 app.use('/api', require('./upload'));
-
-
+//mostrar imagenes
+app.use('/api', require('./imagenes'));
 
 module.exports = app;

@@ -3,6 +3,7 @@ import {NavLink , Link} from 'react-router-dom';
 
 const Navegacion = () => {
 
+
     return(
 
     <div className="navbar-fixed">
@@ -16,8 +17,8 @@ const Navegacion = () => {
 
                 <ul className="right hide-on-med-and-down">
                     <li><NavLink to={`/`} activeClassName='activo'> Home </NavLink></li>
-                    <li><NavLink to={`/categorias`} activeClassName='activo' > Categorias </NavLink></li>
-                    <li><NavLink to={`/productos`} activeClassName='activo'>  Productos </NavLink></li>
+                    <li><NavLink to={`/categoria`} activeClassName='activo' > Categorias </NavLink></li>
+                    <li><NavLink to={`/producto`} activeClassName='activo'>  Productos </NavLink></li>
                     <li><NavLink to={`/`} activeClassName='activo'>  Contacto </NavLink></li>
                 </ul>
 
@@ -26,8 +27,8 @@ const Navegacion = () => {
 
             <ul id="menu-responsive" className="sidenav #e3f2fd blue lighten-5">
                     <li><NavLink to={`/`} activeClassName='activo'> Home </NavLink></li>
-                    <li><NavLink to={`/categorias`} activeClassName='activo' > Categorias </NavLink></li>
-                    <li><NavLink to={`/productos`} activeClassName='activo'>  Productos </NavLink></li>
+                    <li><NavLink to={`/categoria`} activeClassName='activo' > Categorias </NavLink></li>
+                    <li><NavLink to={`/producto`} activeClassName='activo'>  Productos </NavLink></li>
             </ul>
         </nav>
     </div>

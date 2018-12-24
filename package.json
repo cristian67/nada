@@ -10,7 +10,7 @@
     "author": "Cristian",
     "license": "ISC",
     "dependencies": {
-        "bcrypt-nodejs": "0.0.3",
+        "bcryptjs": "^2.4.3",
         "body-parse": "^0.1.0",
         "cors": "^2.8.5",
         "express": "^4.16.4",

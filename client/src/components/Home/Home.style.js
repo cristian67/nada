@@ -1,6 +1,8 @@
 import styles from 'styled-components';
 
 
+
+
 export const Titulo = styles.div`
     font-size:1em;
 `;

@@ -5,10 +5,6 @@ const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-//error bcrypt
-const bcrypt = require('bcrypt-nodejs');
-const saltRounds = 10;
-module.exports.bcrypt = bcrypt;
 
 const app = express();
 const bodyParser = require('body-parser');

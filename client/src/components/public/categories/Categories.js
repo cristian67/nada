@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import Navegation from '../navegation/Navegation';
-
+import axios from 'axios';
 
 
 class Categories extends Component {
+
+  componentWillMount(){
+    this.queryAPI();
+  }
+
+  queryAPI = () => {
+
+    const url = 'api/categoria';
+
+    return axios.get(url)
+                .then(res => console.log(res.data));
+  }
+
+
+
+
     render(){
         return(
             <React.Fragment>
@@ -15,7 +31,7 @@ class Categories extends Component {
                             <div className="card-image">
                             <img src="img/uno.jpg" alt='categoria' />
                             <span className="card-title"> Categoria </span>
-                            <a className="btn-floating halfway-fab waves-effect waves-light red"> 
+                            <a className="btn-floating halfway-fab waves-effect waves-light red">
                             <i className="material-icons">add</i></a>
                             </div>
                         <div className="card-content">
@@ -28,7 +44,7 @@ class Categories extends Component {
                     <div className="card-image">
                         <img src="/img/uno.jpg" alt='some value' />
                         <span className="card-title">Categoria</span>
-                        <a className="btn-floating halfway-fab waves-effect waves-light red">  
+                        <a className="btn-floating halfway-fab waves-effect waves-light red">
                         <i className="material-icons">add</i></a>
                     </div>
                     <div className="card-content">
@@ -41,7 +57,7 @@ class Categories extends Component {
                     <div className="card-image">
                         <img src="/img/uno.jpg" alt='some value' />
                         <span className="card-title">Categoria</span>
-                        <a className="btn-floating halfway-fab waves-effect waves-light red">  
+                        <a className="btn-floating halfway-fab waves-effect waves-light red">
                         <i className="material-icons">cloud</i></a>
                     </div>
                     <div className="card-content">
@@ -54,7 +70,7 @@ class Categories extends Component {
                     <div className="card-image">
                         <img src="/img/uno.jpg" alt='some value' />
                         <span className="card-title">Categoria</span>
-                        <a className="btn-floating halfway-fab waves-effect waves-light red">  
+                        <a className="btn-floating halfway-fab waves-effect waves-light red">
                         <i className="material-icons">add</i></a>
                     </div>
                     <div className="card-content">
@@ -67,7 +83,7 @@ class Categories extends Component {
                     <div className="card-image">
                         <img src="/img/uno.jpg" alt='some value' />
                         <span className="card-title">Categoria</span>
-                        <a className="btn-floating halfway-fab waves-effect waves-light red">  
+                        <a className="btn-floating halfway-fab waves-effect waves-light red">
                         <i className="material-icons">add</i></a>
                     </div>
                     <div className="card-content">
@@ -77,7 +93,7 @@ class Categories extends Component {
               </div>
 
             </div>
-        </div>   
+        </div>
 
         </React.Fragment>
         )
