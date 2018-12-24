@@ -19,6 +19,7 @@ class Router extends Component {
      obtenerProducto = () => {
           axios.get(`/api/producto`)
                .then(res => {
+                    
                     this.setState({
                          productos: res.data.productos
                     })
