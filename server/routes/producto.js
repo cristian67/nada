@@ -37,6 +37,35 @@ app.get("/producto", (req, res) => {
 
 });
 
+
+//========================================
+//  Obtener Productos por categoria: Todos
+//========================================
+app.get("/:categoria_id/productos", (req, res) => {
+
+    let id = req.params.categoria_id
+
+    Producto.find({ categoria: id})
+            .exec((err, productos) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    });
+                }
+                Producto.count({ disponible: true }, (err, conteo) => {
+                    res.json({
+                        ok: true,
+                        productos,
+                        registros: conteo
+                    });
+                });
+
+            });
+
+});
+
+
 //===============================
 //  Obtener Productos: id
 //==============================
@@ -72,6 +101,7 @@ app.get("/producto/:id", (req, res) => {
 
 });
 
+
 //===============================
 //  Crear producto
 //==============================
@@ -105,6 +135,7 @@ app.post("/producto", verificaToken, (req, res) => {
     });
 
 });
+
 
 //===============================
 //  Modificar producto
@@ -191,5 +222,6 @@ app.delete("/producto/:id", verificaToken, (req, res) => {
     });
 
 });
+
 
 module.exports = app;
