@@ -19,18 +19,17 @@ obtenerProducto_id = () => {
 
 
   mostrarProductos = () => {
-    const productos = this.props.productos;
+    //const productos = this.props.productos;
     const categorias = this.props.categorias;
-    if(productos.length === 0) {return null; }
+    if(categorias.length === 0) {return null; }
     
-    console.log(productos._id);
     
     return(
       <React.Fragment>
-              {Object.keys(productos).map(producto => (
+              {Object.keys(categorias).map(categoria => (
                   <MostrarProductos
-                        key={producto}
-                        info={this.props.productos[producto]}
+                        key={categoria}
+                        info={this.props.categorias[categoria]}
                   />
               ))}
       </React.Fragment>

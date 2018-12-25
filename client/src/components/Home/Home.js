@@ -49,7 +49,6 @@ class Home extends Component {
             {/* PRODUCTOS */}
             <div className="row">
                 <Productos
-                    productos={this.props.productos}
                     categorias={this.props.categorias}
                 />
             </div>

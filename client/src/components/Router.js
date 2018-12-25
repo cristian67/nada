@@ -8,7 +8,6 @@ import Home from './home/Home';
 
 class Router extends Component {
      state = {
-          productos: {},
           categorias: {}
       }
       componentDidMount() {
@@ -43,7 +42,6 @@ class Router extends Component {
                                       <Route exact path="/" render={ () => {
                                             return(
                                                  <Home
-                                                      productos  = {this.state.productos}
                                                       categorias = {this.state.categorias}
                                                  />
                                             )
