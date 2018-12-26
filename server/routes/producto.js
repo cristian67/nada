@@ -53,7 +53,7 @@ app.get("/:categoria_id/productos", (req, res) => {
                         err
                     });
                 }
-                Producto.count({ disponible: true }, (err, conteo) => {
+                Producto.count({ disponible: true, categoria: id }, (err, conteo) => {
                     res.json({
                         ok: true,
                         productos,

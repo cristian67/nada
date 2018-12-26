@@ -46,15 +46,10 @@ class Home extends Component {
                 </div>     
             </div>
 
-            {/* PRODUCTOS */}
-            <div className="row">
-                <Productos
-                    categorias={this.props.categorias}
-                />
-            </div>
+       
             
 
-            {/*sketchfab*/}
+            {/*sketchfab
             <WhenInView>
                     {({isInView}) =>
                         <RevelarContenido >
@@ -68,10 +63,10 @@ class Home extends Component {
                                 </div>
                         </RevelarContenido>
                         }
-            </WhenInView>
+            </WhenInView> */}
 
 
-            {/*CONTACTO*/}
+            {/*CONTACTO
             <Parallax
                     blur={1}
                     bgImage={('/img/contact.jpg')}
@@ -105,6 +100,7 @@ class Home extends Component {
                     </div>
                 </div>
                 </Parallax>
+                */}
 
         </React.Fragment>
 

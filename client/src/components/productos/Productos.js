@@ -5,17 +5,6 @@ import axios from 'axios';
 
 class Productos extends Component {
 
-  state = {
-    productos_id: {}
-}
-
-componentDidMount() {
-  this.obtenerProducto_id();
-}
-
-obtenerProducto_id = () => {
-  
-}
 
 
   mostrarProductos = () => {
