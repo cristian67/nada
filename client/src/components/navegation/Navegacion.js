@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink , Link} from 'react-router-dom';
+import './Navegacion.css';
 
 const Navegacion = () => {
     return(
@@ -16,7 +17,7 @@ const Navegacion = () => {
                     <li><NavLink to={`/`} activeClassName='activo'> Home </NavLink></li>
                     <li><NavLink to={`/categoria`} activeClassName='activo' > Categorias </NavLink></li>
                     <li><NavLink to={`/producto`} activeClassName='activo'>  Productos </NavLink></li>
-                    <li><NavLink to={`/`} activeClassName='activo'>  Contacto </NavLink></li>
+                    <li><NavLink to={`/contacto`} activeClassName='activo'>  Contacto </NavLink></li>
                 </ul>
 
             </div>

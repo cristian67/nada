@@ -1,41 +1,41 @@
 import React, { Component } from 'react';
-import MostrarProductos from './mostrarProductos';
-import axios from 'axios';
+import Navegacion from '../navegation/Navegacion';
+import Footer from '../footer/Footer';
 
+import ViewProductos from  './ViewProductos';
 
 class Productos extends Component {
-
-
-
   mostrarProductos = () => {
-    //const productos = this.props.productos;
-    const categorias = this.props.categorias;
-    if(categorias.length === 0) {return null; }
+    const productos = this.props.productos;
     
-    
+    if(productos.length === 0) {return null; }
+        
     return(
       <React.Fragment>
-              {Object.keys(categorias).map(categoria => (
-                  <MostrarProductos
-                        key={categoria}
-                        info={this.props.categorias[categoria]}
-                  />
-              ))}
+            {Object.keys(productos).map(producto => (
+                <ViewProductos
+
+                          key = {producto}
+                          producto = {this.props.productos[producto]}
+                />
+            ))}
       </React.Fragment>
     );
   }
-    render(){
-
+  
+  render(){
         return(
-
-          <React.Fragment>
-            <div className="row">
-                <div className="col s2">
-                      {this.mostrarProductos() }
-                </div>
-            </div>    
-          </React.Fragment>
-        )
+            <React.Fragment>
+                <Navegacion />
+                <div className="container">
+                    <div className="row">
+                        {this.mostrarProductos()}
+                    </div>
+                </div>   
+                <Footer />
+            </React.Fragment>        
+       
+        );
     }
 }
 

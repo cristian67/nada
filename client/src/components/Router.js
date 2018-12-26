@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 
-
-import Home from './home/Home';
+/*Shared*/
 import Error from './Error';
-import Productos from './productos/Productos';
-import SingleProducto from './productos/SingleProducto';
 
+/*Componentes*/
+import Home from './home/Home';
+
+import Productos from './productos/Productos';
+import Categorias from './productos/Categorias';
+import CategoriaProductos from './productos/CategoriaProductos';
+
+import Footer from './footer/Footer';
+import Contacto from './contacto/contacto';
+ 
 
 class Router extends Component {
      
@@ -20,9 +27,8 @@ class Router extends Component {
                productos_Categoria: {}
            }
     
-          this.obtenerCategoriaProducto = this.obtenerCategoriaProducto.bind(this);
 
-    }
+     }
 
       componentDidMount() {
            this.obtenerCategoria();
@@ -54,22 +60,6 @@ class Router extends Component {
                })
      }
 
-      //================================================
-     //  Obtener todas los productos por categoria
-     //=================================================
-     obtenerCategoriaProducto = (idCategoria) => {
-
-          console.log(idCategoria);
-          
-          /*
-          axios.get(`/api/${idCategoria}/productos`)
-               .then(res => {
-                    this.setState({
-                         productos_Categoria: res.data.categoria
-                    })
-               })
-          */
-     }
 
 
      render() {
@@ -78,22 +68,53 @@ class Router extends Component {
 
                               <Switch>
 
-
                                        {/* HOME - Categorias */}
                                       <Route exact path="/" render={ () => {
                                             return(
                                                   <React.Fragment>
                                                             <Home />
-                                                            <Productos
-                                                                      categorias = {this.state.categorias}
-                                                                 />
                                                   </React.Fragment>     
                                             );
                                        }} />
                                    
+                                       
+                                        {/* Por Categoria */}
+                                      <Route exact  path="/categoria" render={ (props) => {
+                                           return(
+                                                <Categorias 
+                                                  categorias = {this.state.categorias}
+                                                />                                                 
+                                           )
+                                       }} />
 
 
-                                        {/* Por PRODUCTO ID */}
+                                        {/* Por Categoria ID Producto */}
+                                      <Route exact  path="/categoria/:idCategoria/productos" render={ (props) => {
+                                           let idCategoria = props.location.pathname.replace('/categoria/','');  
+                                           return(
+                                              <React.Fragment>
+                                                   <CategoriaProductos 
+                                                       idCategoria = {idCategoria}
+                                                   />
+                                              </React.Fragment>
+                                           )
+                                       }} />
+                                        
+                                       {/*Todos los productos */}
+                                        <Route exact  path="/producto" render={ (props) => {
+                                           return(
+                                             <React.Fragment>
+                                                  <Productos 
+                                                        productos = {this.state.productos}
+                                                  />
+                                             </React.Fragment>
+                                           )
+                                       }} />
+
+                                        {/*Todos los productos */}
+                                        <Route exact  path="/contacto" component={Contacto} />
+
+                                        {/* Por Producto ID (En algun futuro)
                                       <Route exact  path="/producto/:idProducto" render={ (props) => {
                                            let idProducto = props.location.pathname.replace('/producto/','');                                           
                                            return(
@@ -101,10 +122,13 @@ class Router extends Component {
                                                        producto = {this.state.productos[idProducto]}
                                                 />
                                            )
-                                       }} />
+                                       }} /> */}
+
+
 
                                        <Route component={Error} />
-
+                                       
+                                   
                               </Switch>
 
                </BrowserRouter>
