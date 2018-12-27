@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import WhenInView from '../WayPoint/WayPoint';
+import WhenInView from './WayPoint/WayPoint';
 
 
 import { RevelarContenido } from './Home.style'
 
 
 /*Importar Componentes */
-import Navegacion from '../navegation/Navegacion';
-import Footer from '../footer/Footer';
+import Navegacion from './navegation/Navegacion';
+import Footer from './footer/Footer';
 
 
 
 /*estilos*/
-import '../../css/animate.css';
+import '../css/animate.css';
 import './Home.css';
 
 
@@ -29,11 +29,10 @@ class Home extends Component {
 
             {/* -----Video Background----*/}
             <div className="fullscreen-bg">     
-                <div className="tituloMania animated flipInX delay-2s ">
+                <div className="tituloMania">
                     <h1 className="titulo">Bienvenido a Lalymania</h1>
                     <hr></hr>
                     <img src={`/img/logo/logo_lalymania_vf.png`} alt="logo"/>
-                    <img src={`/img/logo/pattern.png`} width="200px" alt="logo"/>
                     </div>
                     <div className="video-container">
                         <video className='videoTag fullscreen-bg__video' autoPlay loop muted>
