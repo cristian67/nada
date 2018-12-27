@@ -7,11 +7,11 @@ import Error from './Error';
 import '../css/cargando.css';
 
 /*Componentes*/
-import Home from './home/Home';
 
 import Productos from './productos/Productos';
 import Categorias from './productos/Categorias';
 import CategoriaProductos from './productos/CategoriaProductos';
+import Home from './home/Home';
 
 import Contacto from './contacto/contacto';
  
