@@ -4,6 +4,7 @@ import axios from 'axios';
 
 /*Shared*/
 import Error from './Error';
+import '../css/cargando.css';
 
 /*Componentes*/
 import Home from './home/Home';
@@ -12,7 +13,6 @@ import Productos from './productos/Productos';
 import Categorias from './productos/Categorias';
 import CategoriaProductos from './productos/CategoriaProductos';
 
-import Footer from './footer/Footer';
 import Contacto from './contacto/contacto';
  
 
@@ -24,7 +24,7 @@ class Router extends Component {
           this.state = {
                categorias: {},
                productos:{},
-               productos_Categoria: {}
+               cargando: false
            }
     
 
@@ -38,13 +38,21 @@ class Router extends Component {
       //============================
      //  Obtener todos los productos
      //============================
-     obtenerProducto = () => {
-          axios.get(`/api/producto`)
+     obtenerProducto = async () => {
+          await axios.get(`/api/producto`)
                .then(res => {                    
                     this.setState({
-                         productos: res.data.productos
+                         productos: res.data.productos,
+                         cargando: true
                     })
-               })
+
+                    setTimeout(() => {
+                         this.setState({
+                         cargando: false
+                         });
+                    }, 3000); 
+               });
+               
      }
      
 
@@ -57,12 +65,73 @@ class Router extends Component {
                     this.setState({
                          categorias: res.data.categoria
                     })
+
+                    setTimeout(() => {
+                         this.setState({
+                         cargando: false
+                         });
+                    }, 2000); 
                })
      }
 
 
 
      render() {
+          /*cargando pagina animacion*/
+          const cargando = this.state.cargando;
+          let resultado;
+          let resultado_categoria;
+          let resultado_producto;
+          if(cargando){
+               resultado_categoria = <div className="sk-circle animated fadeIn delay-0.5s">
+                                        <div className="sk-circle1 sk-child"></div>
+                                        <div className="sk-circle2 sk-child"></div>
+                                        <div className="sk-circle3 sk-child"></div>
+                                        <div className="sk-circle4 sk-child"></div>
+                                        <div className="sk-circle5 sk-child"></div>
+                                        <div className="sk-circle6 sk-child"></div>
+                                        <div className="sk-circle7 sk-child"></div>
+                                        <div className="sk-circle8 sk-child"></div>
+                                        <div className="sk-circle9 sk-child"></div>
+                                        <div className="sk-circle10 sk-child"></div>
+                                        <div className="sk-circle11 sk-child"></div>
+                                        <div className="sk-circle12 sk-child"></div>
+                                      </div>
+               resultado_producto =  <div className="sk-circle animated fadeIn delay-0.5s">
+                                        <div className="sk-circle1 sk-child"></div>
+                                        <div className="sk-circle2 sk-child"></div>
+                                        <div className="sk-circle3 sk-child"></div>
+                                        <div className="sk-circle4 sk-child"></div>
+                                        <div className="sk-circle5 sk-child"></div>
+                                        <div className="sk-circle6 sk-child"></div>
+                                        <div className="sk-circle7 sk-child"></div>
+                                        <div className="sk-circle8 sk-child"></div>
+                                        <div className="sk-circle9 sk-child"></div>
+                                        <div className="sk-circle10 sk-child"></div>
+                                        <div className="sk-circle11 sk-child"></div>
+                                        <div className="sk-circle12 sk-child"></div>
+                                     </div> 
+               resultado =         <div className="sk-circle animated fadeIn delay-0.5s">
+                                      <div className="sk-circle1 sk-child"></div>
+                                      <div className="sk-circle2 sk-child"></div>
+                                      <div className="sk-circle3 sk-child"></div>
+                                      <div className="sk-circle4 sk-child"></div>
+                                      <div className="sk-circle5 sk-child"></div>
+                                      <div className="sk-circle6 sk-child"></div>
+                                      <div className="sk-circle7 sk-child"></div>
+                                      <div className="sk-circle8 sk-child"></div>
+                                      <div className="sk-circle9 sk-child"></div>
+                                      <div className="sk-circle10 sk-child"></div>
+                                      <div className="sk-circle11 sk-child"></div>
+                                      <div className="sk-circle12 sk-child"></div>
+                                   </div>                      
+          } else{
+
+               resultado =  <div className="animated fadeIn delay-0.5s"><Home /> </div>
+               resultado_categoria =  <Categorias categorias = {this.state.categorias} />   
+               resultado_producto =  <Productos productos = {this.state.productos} />
+          } 
+
           return (
                <BrowserRouter>
 
@@ -72,18 +141,22 @@ class Router extends Component {
                                       <Route exact path="/" render={ () => {
                                             return(
                                                   <React.Fragment>
-                                                            <Home />
+                                                       {resultado}
                                                   </React.Fragment>     
                                             );
                                        }} />
                                    
-                                       
+                                   <div className="animated fadeIn delay-0.8s">
+ 
                                         {/* Por Categoria */}
                                       <Route exact  path="/categoria" render={ (props) => {
                                            return(
-                                                <Categorias 
-                                                  categorias = {this.state.categorias}
-                                                />                                                 
+                                             <React.Fragment>
+                                                  <div className="animated fadeIn delay-0.3s">
+                                                       {resultado_categoria} 
+                                                  </div>
+                                              </React.Fragment>
+                                          
                                            )
                                        }} />
 
@@ -93,9 +166,11 @@ class Router extends Component {
                                            let idCategoria = props.location.pathname.replace('/categoria/','');  
                                            return(
                                               <React.Fragment>
+                                                  <div className="animated fadeIn delay-0.3s">
                                                    <CategoriaProductos 
                                                        idCategoria = {idCategoria}
                                                    />
+                                                   </div>
                                               </React.Fragment>
                                            )
                                        }} />
@@ -104,15 +179,23 @@ class Router extends Component {
                                         <Route exact  path="/producto" render={ (props) => {
                                            return(
                                              <React.Fragment>
-                                                  <Productos 
-                                                        productos = {this.state.productos}
-                                                  />
+                                                  <div className="animated fadeIn delay-0.3s">
+                                                       {resultado_producto}
+                                                  </div>
                                              </React.Fragment>
                                            )
                                        }} />
 
                                         {/*Todos los productos */}
-                                        <Route exact  path="/contacto" component={Contacto} />
+                                        <Route exact  path="/contacto" render={()=>{
+                                             return(
+                                                  <React.Fragment>
+                                                       <div className="animated fadeIn delay-0.4s">
+                                                            <Contacto />
+                                                       </div>
+                                                  </React.Fragment>
+                                             );
+                                        }} />
 
                                         {/* Por Producto ID (En algun futuro)
                                       <Route exact  path="/producto/:idProducto" render={ (props) => {
@@ -124,10 +207,12 @@ class Router extends Component {
                                            )
                                        }} /> */}
 
+                                        </div>
 
 
                                        <Route component={Error} />
-                                       
+
+    
                                    
                               </Switch>
 

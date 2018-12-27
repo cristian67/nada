@@ -29,7 +29,12 @@ class Home extends Component {
 
             {/* -----Video Background----*/}
             <div className="fullscreen-bg">     
-                <h1 className="tituloMania">Bienvenido a Lalymania</h1>
+                <div className="tituloMania animated flipInX delay-2s ">
+                    <h1 className="titulo">Bienvenido a Lalymania</h1>
+                    <hr></hr>
+                    <img src={`/img/logo/logo_lalymania_vf.png`} alt="logo"/>
+                    <img src={`/img/logo/pattern.png`} width="200px" alt="logo"/>
+                    </div>
                     <div className="video-container">
                         <video className='videoTag fullscreen-bg__video' autoPlay loop muted>
                                 <source src="/video/video.mp4" type='video/mp4' />
@@ -53,7 +58,7 @@ class Home extends Component {
             <WhenInView>
                     {({isInView}) =>
                         <RevelarContenido >
-                                <div className="card-panel #212121 grey darken-4  animated fadeInLeft delay-0.4s">
+                                <div className="card-panel #212121 grey darken-4">
                                     <div className="row">
                                         <div className="col s12 center-align white-text "><h2>No paso nada</h2></div>
                                         <div hidden={!isInView} className="sketchfab-embed-wrapper col s12 center-align">
