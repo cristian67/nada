@@ -21,13 +21,13 @@ class Login extends Component {
       password: this.passwordRef.current.value
     }
 
-    this.props.verificaToken(datosLogin);
 
+    //this.props.verificaToken(datosLogin);
+    
     }
 
     render(){
         return(
-
             <div className="container">
                 <div className="row">
                 <div className="card-panel">
@@ -38,18 +38,19 @@ class Login extends Component {
                         <form onSubmit={this.obtenerToken}>
                             <div className="row">
                                 <div className="input-field col s12">
-                                    <input ref={this.emailRef} type="text" placeholder="E-mail" />
+                                    <input ref={this.emailRef} id="email" type="email" className="validate" />
+                                    <label htmlFor="email">Email</label>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col s12">
-                                    <input ref={this.passwordRef} type="text" placeholder="Password" />
+                                    <input ref={this.passwordRef}  type="password" className="validate" />
+                                    <label htmlFor="password">Password</label>
                                 </div>
                             </div>
                             <div className="center-align">
                                 <button type="submit" className="btn light-blue darken-5">Send</button>
                             </div>
-
                         </form>
                     </div>
                 </div>

@@ -135,7 +135,6 @@ app.delete('/usuario/:id', verificaToken, (req, res) => {
         res.json({
             ok: true,
             usuario: UsuarioBorrado
-
         });
     });
 });
