@@ -17,6 +17,7 @@ const path = require('path');
 // default options
 app.use(fileUpload());
 
+
 app.put('/upload/:tipo/:id', function(req, res) {
 
     let tipo = req.params.tipo;

@@ -25,47 +25,55 @@ class FormularioProducto extends Component {
     }
 
     
-      
-        
-
     //===============================
     //  Crear Producto
     //===============================
      crearProducto = (e) => {
-          e.preventDefault();
-
-          const token = JSON.stringify(localStorage.getItem("token"));
-          let TokenFix = token.replace('"','');  
-          let TokenFix2 = TokenFix.replace('"','');  
-
-          
-          const config = {headers: { 
+        e.preventDefault();
+        //Token headers
+        const config = {headers: { 
                         'Content-Type': 'application/json',
                         'token': localStorage.token 
                     }}
-          
-          /* const config = {
-            headers: {
-                TokenFix2,
-            }
-          }*/
+        
+        //Construir FormData
+        const fd = new FormData();
+        fd.append('nombre', this.nombreRef.current.value);
+        fd.append('precioUni', this.precioRef.current.value);
+        fd.append('categoria', this.categoriaRef.current.value);
+        fd.append('image', this.state.selectedFile);
 
-
-          // leer los refs
-          const producto = {
+        
+        
+        /*
+        //crear objecto
+        const producto = {
                nombre : this.nombreRef.current.value,
                precioUni: this.precioRef.current.value,
                categoria: this.categoriaRef.current.value,
-          }
+               
+        }*/
 
-          console.log(producto);
           
-          //postCrearProducto(producto, config);
-         
+        if(this.state.selectedFile && this.state.selectedFile.name)    
+          {  
+            const url = '/api/producto';
+
+            axios.post(url, fd, config)
+                    .then(  res => {
+                        console.log(res);
+                        this.setState({
+                            producto: res.data.producto
+                        });
+                    })
+                    .catch( err => {console.log('No tienes permisos');
+                    })   
+        
+            } else {
+                console.log("No hay imagen cargada");
+          }
           
      }
-
-
 
      //===============================
      //  Subir archivo de imagen
@@ -79,21 +87,15 @@ class FormularioProducto extends Component {
 
      fileUploaderHandler = () => {
 
-        //console.log(this.state.selectedFile);
-        //console.log(this.state.selectedFile.name);
-        /*
-        if(this.state.selectedFile && this.state.selectedFile.name) {
         const fd = new FormData();
         fd.append('image', this.state.selectedFile);
 
-        const url = '/api/upload/producto/5c22b7897ed2e431a0777646';
+        /*
+        const url =`/api/upload/producto/${this.state.producto._id}`;
+        
         axios.put(url,fd)
               .then(  res => { console.log(res) })
-              .catch( err => { console.log("Extension no permitida") })
-        } else {
-            console.log("no image");     
-        }*/
-
+              .catch( err => { console.log("Extension no permitida") })*/
      }
 
      render() { 
@@ -140,7 +142,7 @@ class FormularioProducto extends Component {
                             </div>
 
                            <div className="center-align">
-                               <button onClick={this.fileUploaderHandler} type="submit" className="btn light-blue darken-5">Crear</button>
+                               <button type="submit" className="btn light-blue darken-5">Crear</button>
                            </div>
 
                        </form>

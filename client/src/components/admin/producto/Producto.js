@@ -9,7 +9,7 @@ class Producto extends Component {
 
      render() { 
      
-      const {nombre,precioUni, img} = this.props.info;
+      const {nombre,precioUni,img} = this.props.info;
       
           return (
                <tr>

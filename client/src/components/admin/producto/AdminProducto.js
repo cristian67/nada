@@ -49,7 +49,7 @@ class AdminProducto extends Component {
 
                 <div className="col s12 md8 lg8 center-align">
                     <h2 className="text-center">Productos</h2>
-                    <Link to={`/admin/producto/crear`} className="btn waves-effect waves-light"> Crear </Link>
+                    <Link to={`/admin/producto/crear`} className="btn waves-effect waves-light btn-large"> Crear </Link>
  
                     <ListadoProducto 
                          productos ={this.props.productos}

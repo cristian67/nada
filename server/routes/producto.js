@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const app = express();
 
 const Producto = require('../models/producto');
@@ -6,19 +7,21 @@ const Producto = require('../models/producto');
 let { verificaToken } = require('../../server/middleware/autenticacion');
 
 
+//Filesystem para borrar sin problemas
+const fs = require('fs');
+//Path para manejar las rutas
+const path = require('path');
+
+// default options
+app.use(fileUpload());
 
 //===============================
 //  Obtener Productos: Todos
 //==============================
 app.get("/producto", (req, res) => {
 
-    let desde = req.query.desde || 0;
-    desde = Number(desde);
-
     Producto.find({ disponible: true })
-        .skip(desde)
-        .limit(5)
-        .exec((err, productos) => {
+            .exec((err, productos) => {
 
             if (err) {
                 return res.status(500).json({
@@ -105,21 +108,77 @@ app.get("/producto/:id", (req, res) => {
 //===============================
 //  Crear producto
 //==============================
-app.post("/producto", verificaToken, (req, res) => {
+app.post("/:tipo", verificaToken, (req, res) => {
+    
+    let tipo = req.params.tipo;
     let body = req.body;
+     //ERROR
+     if (Object.keys(req.files).length == 0) {
+        return res.status(400).json({
+            ok: false,
+            err: {
+                messsage: "No se a encontrado archivo"
+            }
+        })
+    }
 
-    //Validaciones
-    let producto = new Producto({
-        usuario: req.usuario._id,
-        nombre: body.nombre,
-        precioUni: body.precioUni,
-        descripcion: body.descripcion,
-        disponible: body.disponible,
-        categoria: body.categoria
-    });
+     //VALIDAR EXTENSIONES
+     let tiposValidos = ['producto'];
+     if (tiposValidos.indexOf(tipo) < 0) {
+         return res.status(400).json({
+             ok: false,
+             err: {
+                 messsage: "tipos validos:" + tiposValidos.join(', ')
+             }
+         });
+     }
 
-    //Guardad
-    producto.save((err, productoBD) => {
+    //VALIDAR EXTENSIONES
+    let archivo = req.files.image;
+
+     //Obtener el nombre del Archivo
+     let nombreCortado = archivo.name.split('.');
+     //obtener ultima posicion
+     let extensionArchivo = nombreCortado[nombreCortado.length - 1];
+ 
+     let extencionesValindas = ['png', 'jpg', 'gif', 'jpeg', 'JPG', 'PNG'];
+     
+     if (extencionesValindas.indexOf(extensionArchivo) < 0) {
+        return res.status(400).json({
+            ok: false,
+            err: {
+                messsage: "Extensiones permitidas:" + extencionesValindas.join(', '),
+                ext: extensionArchivo
+            }
+        });
+    }
+
+    //CAMBIAR NOMBRE ARCHIVO
+    let nombreArchivo = `${nombreCortado[0]}-${new Date().getSeconds()}-${new Date().getMilliseconds()}.${extensionArchivo}`;
+
+
+     //SUBIR ARCHIVO Y GUARDAR
+     archivo.mv(`client/public/upload/${tipo}/${nombreArchivo}`, (err) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+
+         //Validaciones
+        let producto = new Producto({
+            usuario: req.usuario._id,
+            nombre: body.nombre,
+            img:nombreArchivo,
+            precioUni: body.precioUni,
+            descripcion: body.descripcion,
+            disponible: body.disponible,
+            categoria: body.categoria
+        });
+
+        //Guardad
+        producto.save((err, productoBD) => {
         //Error Servicio de base de datos
         if (err) {
             return res.status(500).json({
@@ -130,10 +189,12 @@ app.post("/producto", verificaToken, (req, res) => {
         //Respuesta correcta
         res.status(201).json({
             ok: true,
-            producto: productoBD
+            producto: productoBD,
+            img: nombreArchivo
         });
     });
-
+        
+    });
 });
 
 
