@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import NavegationAdmin from '../navegation/NavegationAdmin';
+import ListadoProducto from '../producto/ListadoProducto'; 
 
 class AdminProducto extends Component {
     constructor(props) {
@@ -43,8 +44,19 @@ class AdminProducto extends Component {
         return(
             <React.Fragment>
                 <NavegationAdmin />
-                <div>Products Login</div>
+                <div>Products pagina q se ve al Logearse </div>
                 <button type="button" onClick={this.logout}>Logout</button>
+
+                <div className="col s12 md8 lg8 center-align">
+                    <h2 className="text-center">Productos</h2>
+                    <Link to={`/admin/producto/crear`} className="btn waves-effect waves-light"> Crear </Link>
+ 
+                    <ListadoProducto 
+                         productos ={this.props.productos}
+                         //borrarPost={this.props.borrarPost}
+                    />
+               </div>
+
             </React.Fragment>
         )
     }

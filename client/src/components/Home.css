@@ -24,12 +24,12 @@
   color: orangered;
 }
 
-
 .video-container{
   position: absolute;
   top:0;
   left: 0;
   width: 100%;
+  height: 100vh;
 }
 
 .parallax{
@@ -45,6 +45,7 @@
 .card-panel{
   margin: 0%;
   padding-top: 10px;
+  font-size: 1.2em;
 }
 
 .card{

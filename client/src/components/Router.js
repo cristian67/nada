@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 
 /*Shared*/
@@ -18,17 +18,9 @@ import Contacto from './contacto/contacto';
 import TestLogin from './admin/login/TestLogin'; 
 import AdminCategoria from './admin/categoria/AdminCategoria';
 import AdminProducto from  './admin/producto/AdminProducto';
+import FormularioProducto from './admin/producto/FormularioProducto';
 
 
-function AuthenticatedRoute({component: Component, authenticated, ...rest}) {
-     return (
-       <Route
-         {...rest}
-         render={(props) => authenticated === true
-             ? <Component {...props} {...rest} />
-             : <Redirect to={{pathname: '/login', state: {from: props.location}}} /> } />
-     )
-   }
 
 
 
@@ -47,10 +39,6 @@ class Router extends Component {
                token: '', 
                error:''
            }
-          
-     //Funciones
-     this.verificaToken  = this.verificaToken.bind(this);
-     this.setCurrentUser = this.setCurrentUser.bind(this);
 
 
      }
@@ -58,7 +46,6 @@ class Router extends Component {
       componentDidMount() {
            this.obtenerCategoria();
            this.obtenerProducto();
-           this.setCurrentUser();
       }
 
 
@@ -100,65 +87,6 @@ class Router extends Component {
                     }, 2000); 
                })
      }
-
-
-     //================================
-     //  QUERY TOKEN
-     //================================
-     verificaToken = async (datosLogin) => {
-          const url = '/api/login';
-          await axios.post(url, datosLogin)
-               .then(res => {
-                        this.setCurrentUser(res.data.usuario.email);
-                        console.log(res.data);
-
-                        this.setState({
-                          usuario: res.data.nombre,
-                          estadoUser: res.data.usuario.estado,
-                          cargando:true,
-                          token: res.data.token
-                        });
-
-
-                        setTimeout(() => {
-                          this.setState({
-                          cargando: false
-                          });
-                         }, 1000); 
-                      })
-
-               .catch(err => {
-                      this.setState({
-                        cargando:true,
-                        error: 'Email/Password no son correctos para ingresar.'
-                      })
-                      setTimeout(() => {
-                        this.setState({
-                        cargando: false
-                        });
-                       }, 1000);
-               });
-
-          
-          
-        }
-
-     
-        setCurrentUser(user) {
-          if (user) {
-            this.setState({
-              currentUser: user,
-              authenticated: true
-            })
-            this.props.history.push(`/target`);
-          } else {
-            this.setState({
-              currentUser: null,
-              authenticated: false
-            })
-          }
-        }
-
 
 
      render() {
@@ -241,7 +169,7 @@ class Router extends Component {
                                            return(
                                              <React.Fragment>
                                                   <div className="animated fadeIn delay-0.3s">
-                                                       {this.CargarResultado.resultado_categoria} 
+                                                       {resultado_categoria} 
                                                   </div>
                                               </React.Fragment>
                                           
@@ -297,28 +225,43 @@ class Router extends Component {
                                                   </React.Fragment>
                                              );
                                         }} />
-
-
-                                        
-                                         {/* categoria admin */}
-                                         <AuthenticatedRoute exact 
-                                                             path="/admin/categoria" 
-                                                             authenticated={this.state.authenticated}
-                                                             component={AdminCategoria} 
-                                                             token={this.state.categoria} />
-
-                                                            
+               
                                            
-                                         {/* Produucto */}
+                                         {/* Producto ADMIN acceso al home de productos */}
                                          <Route exact  path="/admin/producto" render={()=>{
                                              return(
                                                   <React.Fragment>
                                                        <div className="animated fadeIn delay-0.4s">
-                                                            <AdminProducto />
+                                                            <AdminProducto 
+                                                                 productos = {this.state.productos}
+                                                            />
                                                        </div>
                                                   </React.Fragment>
                                              );
                                         }} />
+
+                                         {/* Producto ADMIN Crear */}
+                                        <Route exact path="/admin/producto/crear" render={ () => {
+                                            return(
+                                                <FormularioProducto 
+                                                    crearProducto={this.crearPost}
+                                                />
+                                            )
+                                        }} />
+
+                                        <Route exact  path="/admin/categoria" render={()=>{
+                                             return(
+                                                  <React.Fragment>
+                                                       <div className="animated fadeIn delay-0.4s">
+                                                            <AdminCategoria  
+                                                                 productos = {this.state.productos}
+                                                            />
+                                                       </div>
+                                                  </React.Fragment>
+                                             );
+                                        }} />
+
+
 
 
                               </Switch>

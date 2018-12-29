@@ -17,16 +17,16 @@ const NavegacionAdmin = () => {
 
 
                 <ul className="right hide-on-med-and-down #212121 grey darken-4">
-                    <li><NavLink to={`/login/categoria`} activeClassName='activo' > Categorias </NavLink></li>
-                    <li><NavLink to={`/login/producto`} activeClassName='activo'>  Productos </NavLink></li>
+                    <li><NavLink to={`/admin/categoria`} activeClassName='activo' > Categorias </NavLink></li>
+                    <li><NavLink to={`/admin/producto`} activeClassName='activo'>  Productos </NavLink></li>
 
                 </ul>
 
             </div>
 
             <ul id="menu-responsive" className="sidenav #e3f2fd blue lighten-5">
-                    <li><NavLink to={`/login/categoria`} activeClassName='activo' > Categorias </NavLink></li>
-                    <li><NavLink to={`/login/producto`} activeClassName='activo'>  Productos </NavLink></li>
+                    <li><NavLink to={`/admin/categoria`} activeClassName='activo' > Categorias </NavLink></li>
+                    <li><NavLink to={`/admin/producto`} activeClassName='activo'>  Productos </NavLink></li>
             </ul>
         </nav>
     </div>
