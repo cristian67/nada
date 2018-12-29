@@ -43,6 +43,7 @@ class TestLogin extends Component {
                 let dataJSON = res 
                 if(dataJSON.ok == true) {
                     localStorage.setItem('dataUser', dataJSON);
+                    localStorage.setItem('token', dataJSON.token);
                     console.log(dataJSON);
                     this.setState({ redirect: true});
                 }

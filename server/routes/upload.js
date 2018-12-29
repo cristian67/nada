@@ -46,14 +46,14 @@ app.put('/upload/:tipo/:id', function(req, res) {
 
 
     //VALIDAR EXTENSIONES
-    let archivo = req.files.archivo;
+    let archivo = req.files.image;
 
     //Obtener el nombre del Archivo
     let nombreCortado = archivo.name.split('.');
     //obtener ultima posicion
     let extensionArchivo = nombreCortado[nombreCortado.length - 1];
 
-    let extencionesValindas = ['png', 'jpg', 'gif', 'jpeg'];
+    let extencionesValindas = ['png', 'jpg', 'gif', 'jpeg', 'JPG', 'PNG'];
 
     if (extencionesValindas.indexOf(extensionArchivo) < 0) {
         return res.status(400).json({

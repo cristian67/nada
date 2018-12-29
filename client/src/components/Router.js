@@ -40,7 +40,6 @@ class Router extends Component {
                error:''
            }
 
-
      }
      
       componentDidMount() {
@@ -244,7 +243,7 @@ class Router extends Component {
                                         <Route exact path="/admin/producto/crear" render={ () => {
                                             return(
                                                 <FormularioProducto 
-                                                    crearProducto={this.crearPost}
+                                                    categorias = {this.state.categorias}
                                                 />
                                             )
                                         }} />
