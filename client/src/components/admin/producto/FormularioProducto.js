@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import {postCrearProducto} from '../services/postData';
 import NavegationAdmin from '../navegation/NavegationAdmin';
 import OptionSelect from '../producto/OptionSelect';
-
-import axios from 'axios';
 
 
 class FormularioProducto extends Component {
@@ -42,34 +39,13 @@ class FormularioProducto extends Component {
         fd.append('precioUni', this.precioRef.current.value);
         fd.append('categoria', this.categoriaRef.current.value);
         fd.append('image', this.state.selectedFile);
-
-        
-        
-        /*
-        //crear objecto
-        const producto = {
-               nombre : this.nombreRef.current.value,
-               precioUni: this.precioRef.current.value,
-               categoria: this.categoriaRef.current.value,
-               
-        }*/
-
           
         if(this.state.selectedFile && this.state.selectedFile.name)    
           {  
-            const url = '/api/producto';
 
-            axios.post(url, fd, config)
-                    .then(  res => {
-                        console.log(res);
-                        this.setState({
-                            producto: res.data.producto
-                        });
-                    })
-                    .catch( err => {console.log('No tienes permisos');
-                    })   
-        
-            } else {
+            postCrearProducto(fd,config);
+            
+        } else {
                 console.log("No hay imagen cargada");
           }
           
@@ -85,19 +61,7 @@ class FormularioProducto extends Component {
          
      }
 
-     fileUploaderHandler = () => {
-
-        const fd = new FormData();
-        fd.append('image', this.state.selectedFile);
-
-        /*
-        const url =`/api/upload/producto/${this.state.producto._id}`;
-        
-        axios.put(url,fd)
-              .then(  res => { console.log(res) })
-              .catch( err => { console.log("Extension no permitida") })*/
-     }
-
+ 
      render() { 
           return ( 
            <React.Fragment>

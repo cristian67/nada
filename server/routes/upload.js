@@ -17,14 +17,16 @@ const path = require('path');
 // default options
 app.use(fileUpload());
 
-
 app.put('/upload/:tipo/:id', function(req, res) {
 
     let tipo = req.params.tipo;
     let id = req.params.id;
+    
+     //VALIDAR EXTENSIONES
+     let archivo = req.files.archivo;
 
     //ERROR
-    if (Object.keys(req.files).length == 0) {
+    if (Object.keys(req.files).length === 0) {
         return res.status(400).json({
             ok: false,
             err: {
@@ -46,15 +48,14 @@ app.put('/upload/:tipo/:id', function(req, res) {
     }
 
 
-    //VALIDAR EXTENSIONES
-    let archivo = req.files.image;
+   
 
     //Obtener el nombre del Archivo
     let nombreCortado = archivo.name.split('.');
     //obtener ultima posicion
     let extensionArchivo = nombreCortado[nombreCortado.length - 1];
 
-    let extencionesValindas = ['png', 'jpg', 'gif', 'jpeg', 'JPG', 'PNG'];
+    let extencionesValindas = ['png', 'jpg', 'gif', 'jpeg'];
 
     if (extencionesValindas.indexOf(extensionArchivo) < 0) {
         return res.status(400).json({

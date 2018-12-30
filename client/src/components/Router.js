@@ -19,6 +19,7 @@ import TestLogin from './admin/login/TestLogin';
 import AdminCategoria from './admin/categoria/AdminCategoria';
 import AdminProducto from  './admin/producto/AdminProducto';
 import FormularioProducto from './admin/producto/FormularioProducto';
+import EditarProducto from './admin/producto/EditarProducto';
 
 
 
@@ -29,14 +30,9 @@ class Router extends Component {
      constructor(){
           super();
           this.state = {
-               authenticated: false,
-               categorias: {},
-               productos:{},
+               categorias: [],
+               productos:[],
                cargando: false,
-               currentUser: '',
-               estadoUser: false,
-               usuario: '',
-               token: '', 
                error:''
            }
 
@@ -247,6 +243,30 @@ class Router extends Component {
                                                 />
                                             )
                                         }} />
+
+                                        {/* Producto ADMIN Actualizar */}
+                                        <Route exact path="/admin/producto/editar/:productoId" render={ (props) => {
+                                             
+                                             let idProducto = props.location.pathname.replace('/admin/producto/editar/', '');
+                                          
+                                             const productos = this.state.productos;
+                                             
+                                             let filtro
+                                             filtro = productos.filter(    producto => (
+                                                            producto._id == idProducto
+                                             ))
+                                                                
+                                                            
+
+                                             return(
+                                                  <EditarProducto 
+                                                       producto = {filtro[0]}
+                                                       categorias = {this.state.categorias}
+                                                  />
+                                             );
+                                        }}
+                                        />
+
 
                                         <Route exact  path="/admin/categoria" render={()=>{
                                              return(
